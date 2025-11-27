@@ -8,9 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class SellerAuthController extends Controller
 {
+    // Use config mapping instead of in-controller constant
     /**
      * Menampilkan form registrasi seller
      */
@@ -24,7 +26,10 @@ class SellerAuthController extends Controller
      */
     public function register(Request $request)
     {
-        $request->validate([
+        // Load mapping from config
+        $provinceCities = config('locations.province_cities', []);
+        $cityVillages = config('locations.city_villages', []);
+        $rules = [
             'store_name' => 'required|string|max:255',
             'store_description' => 'required|string|max:500',
             'pic_name' => 'required|string|max:255',
@@ -33,13 +38,35 @@ class SellerAuthController extends Controller
             'street_address' => 'required|string|max:255',
             'rt_rw' => 'required|string|max:10',
             'village' => 'required|string|max:255',
-            'city' => 'required|string|max:255',
-            'province' => 'required|string|max:255',
+            'province' => ['required', 'string', Rule::in(array_keys($provinceCities))],
+            'city' => ['required', 'string', Rule::in($provinceCities[$request->province] ?? [])],
             'id_card_number' => 'required|string|max:20',
             'id_card_file' => 'required|file|mimes:jpg,jpeg,png,pdf|max:2048',
             'pic_photo' => 'required|file|mimes:jpg,jpeg,png|max:2048',
             'password' => 'required|string|min:8|confirmed',
-        ]);
+        ];
+
+        // Jika untuk kota tertentu ada mapping kelurahan (dan pengguna tidak memilih manual), pastikan village masuk ke daftar mapping.
+        $villageManualStatus = (int) ($request->input('village_manual', 0));
+        if (isset($cityVillages[$request->city]) && !$villageManualStatus) {
+            $rules['village'] = [
+                'required', 'string', Rule::in($cityVillages[$request->city]),
+            ];
+        } else {
+            // ketika manual atau tidak ada mapping, terima input string biasa
+            $rules['village'] = 'required|string|max:255';
+        }
+        // validate village_manual as 0 or 1
+        $rules['village_manual'] = 'sometimes|in:0,1';
+
+        $messages = [
+            'province.in' => 'Provinsi yang dipilih tidak valid.',
+            'city.in' => 'Kota yang dipilih tidak valid untuk provinsi ini.',
+            'email.unique' => 'Email sudah terdaftar sebagai penjual.',
+            'password.confirmed' => 'Konfirmasi password tidak cocok.',
+        ];
+
+        $request->validate($rules, $messages);
 
         // Upload files
         $idCardPath = $request->file('id_card_file')->store('seller-documents', 'public');

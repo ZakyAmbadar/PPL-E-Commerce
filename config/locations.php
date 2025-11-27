@@ -1,0 +1,58 @@
+<?php
+
+return [
+    // Map of provinces => cities
+    'province_cities' => [
+        "Aceh" => ["Banda Aceh", "Langsa", "Lhokseumawe", "Sabang", "Subulussalam"],
+        "Bali" => ["Denpasar"],
+        "Bangka Belitung" => ["Pangkalpinang"],
+        "Banten" => ["Cilegon", "Serang", "Tangerang Selatan", "Tangerang"],
+        "Bengkulu" => ["Bengkulu"],
+        "Daerah Istimewa Yogyakarta" => ["Yogyakarta"],
+        "Daerah Khusus Ibukota Jakarta" => ["Kota Administrasi Jakarta Barat","Kota Administrasi Jakarta Pusat","Kota Administrasi Jakarta Selatan","Kota Administrasi Jakarta Timur","Kota Administrasi Jakarta Utara"],
+        "Gorontalo" => ["Gorontalo"],
+        "Jambi" => ["Jambi", "Sungai Penuh"],
+        "Jawa Barat" => ["Bandung","Bekasi","Bogor","Cimahi","Cirebon","Depok","Sukabumi","Tasikmalaya","Banjar"],
+        "Jawa Tengah" => ["Magelang","Pekalongan","Salatiga","Semarang","Surakarta","Tegal"],
+        "Jawa Timur" => ["Batu","Blitar","Kediri","Madiun","Malang","Mojokerto","Pasuruan","Probolinggo","Surabaya"],
+        "Kalimantan Barat" => ["Pontianak","Singkawang"],
+        "Kalimantan Selatan" => ["Banjarbaru","Banjarmasin"],
+        "Kalimantan Tengah" => ["Palangka Raya"],
+        "Kalimantan Timur" => ["Balikpapan","Bontang","Samarinda","Nusantara"],
+        "Kalimantan Utara" => ["Tarakan"],
+        "Kepulauan Riau" => ["Batam","Tanjungpinang"],
+        "Lampung" => ["Bandar Lampung","Metro"],
+        "Maluku Utara" => ["Ternate","Tidore Kepulauan"],
+        "Maluku" => ["Ambon","Tual"],
+        "Nusa Tenggara Barat" => ["Bima","Mataram"],
+        "Nusa Tenggara Timur" => ["Kupang"],
+        "Papua Barat Daya" => ["Sorong"],
+        "Papua" => ["Jayapura"],
+        "Riau" => ["Dumai","Pekanbaru"],
+        "Sulawesi Selatan" => ["Makassar","Palopo","Parepare"],
+        "Sulawesi Tengah" => ["Palu"],
+        "Sulawesi Tenggara" => ["Baubau","Kendari"],
+        "Sulawesi Utara" => ["Bitung","Kotamobagu","Manado","Tomohon"],
+        "Sumatera Barat" => ["Bukittinggi","Padang","Padang Panjang","Pariaman","Payakumbuh","Sawahlunto","Solok"],
+        "Sumatera Selatan" => ["Lubuk Linggau","Pagar Alam","Palembang","Prabumulih"],
+        "Sumatera Utara" => ["Binjai","Gunungsitoli","Medan","Padangsidimpuan","Pematangsiantar","Sibolga","Tanjungbalai","Tebing Tinggi"],
+    ],
+
+    // Example map of city => villages (kelurahan). Extended list for major cities (not exhaustive).
+    'city_villages' => [
+        "Cilegon" => ["Cilegon Lama","Cilegon Baru","Kota Baru"],
+        "Serang" => ["Serang Barat","Serang Timur","Serang Kota"],
+        "Tangerang Selatan" => ["Serpong","Pondok Aren","Ciputat","Ciputat Timur","Setu"],
+        "Tangerang" => ["Karawaci","Cibodas","Pinang","Periuk"],
+        "Denpasar" => ["Denpasar Barat","Denpasar Timur","Denpasar Utara","Denpasar Selatan"],
+        "Bandung" => ["Sukajadi","Coblong","Bandung Wetan","Cibeunying Kaler","Cicendo"],
+        "Bekasi" => ["Bekasi Barat","Bekasi Timur","Bekasi Selatan","Bekasi Utara"],
+        "Bogor" => ["Bogor Barat","Bogor Kota","Bogor Utara","Bogor Selatan"],
+        "Depok" => ["Beji","Cimanggis","Limo","Pancoran Mas","Sukmajaya","Tapos"],
+        "Surabaya" => ["Sawahan","Wonokromo","Genteng","Gubeng","Sukolilo"],
+        "Semarang" => ["Semarang Barat","Semarang Tengah","Semarang Selatan","Semarang Utara"],
+        "Makassar" => ["Ujung Pandang","Mariso","Bontoala","Panakkukang"],
+        "Palembang" => ["Ilir Barat","Ilir Timur","Sukarami","Bukit Kecil"],
+        // A few more examples; can be extended.
+    ],
+];
