@@ -34,7 +34,7 @@
                         </span>
                     @endif
                 </a>
-                <a href="#" class="flex items-center px-6 py-3 hover:bg-blue-700 border-l-4 border-transparent">
+                <a href="{{ route('admin.reports.index') }}" class="flex items-center px-6 py-3 hover:bg-blue-700 border-l-4 border-transparent">
                     <i class="fas fa-chart-bar w-6"></i>
                     <span class="ml-3">View Reports</span>
                 </a>
@@ -102,21 +102,7 @@
                         </div>
                     </div>
 
-                    <!-- Total Revenue -->
-                    <div class="bg-white rounded-lg shadow p-6 border-l-4 border-purple-500">
-                        <div class="flex items-center justify-between">
-                            <div>
-                                <p class="text-gray-500 text-sm">Monthly Revenue</p>
-                                <p class="text-3xl font-bold text-gray-800 mt-2">Rp 12.350Jt</p>
-                            </div>
-                            <div class="bg-purple-100 p-3 rounded-full">
-                                <i class="fas fa-dollar-sign text-purple-500 text-xl"></i>
-                            </div>
-                        </div>
-                        <div class="mt-4 text-sm text-green-600">
-                            <i class="fas fa-arrow-up"></i> 15% from last month
-                        </div>
-                    </div>
+                    <!-- (Monthly Revenue widget removed) -->
 
                     <!-- Pending Verification -->
                     <div class="bg-white rounded-lg shadow p-6 border-l-4 border-yellow-500">
@@ -160,7 +146,7 @@
                         @endif
                     </a>
 
-                    <a href="#" class="bg-white rounded-lg shadow p-6 text-center hover:shadow-md transition-shadow cursor-pointer">
+                    <a href="{{ route('admin.reports.index') }}" class="bg-white rounded-lg shadow p-6 text-center hover:shadow-md transition-shadow cursor-pointer">
                         <div class="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
                             <i class="fas fa-chart-bar text-purple-500 text-xl"></i>
                         </div>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\SellerDashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\SellerAuthController;
@@ -44,4 +45,10 @@ Route::prefix('admin')->group(function () {
     Route::get('/sellers', [AdminController::class, 'allSellers'])->name('admin.sellers.all');
     Route::post('/sellers/{id}/approve', [AdminController::class, 'approveSeller'])->name('admin.sellers.approve');
     Route::post('/sellers/{id}/reject', [AdminController::class, 'rejectSeller'])->name('admin.sellers.reject');
+
+    // Report PDF routes (platform reports)
+    Route::get('/reports', [ReportController::class, 'index'])->name('admin.reports.index');
+    Route::get('/reports/sellers/status.pdf', [ReportController::class, 'sellersByStatusPdf'])->name('admin.reports.sellers.status.pdf');
+    Route::get('/reports/sellers/province.pdf', [ReportController::class, 'sellersByProvincePdf'])->name('admin.reports.sellers.province.pdf');
+    Route::get('/reports/products/rating.pdf', [ReportController::class, 'productsByRatingPdf'])->name('admin.reports.products.rating.pdf');
 });

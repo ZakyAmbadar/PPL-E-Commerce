@@ -128,76 +128,7 @@
                         </div>
                     </div>
 
-                    <!-- Recent Activity -->
-                    <div class="bg-white rounded-lg shadow">
-                        <div class="px-6 py-4 border-b">
-                            <h2 class="text-xl font-semibold text-gray-800">Recent Activity</h2>
-                        </div>
-                        <div class="p-6">
-                            <div class="space-y-4">
-                                @foreach($recentActivities as $activity)
-                                <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                    <div class="flex-shrink-0">
-                                        @if($activity['type'] === 'order')
-                                        <div class="bg-green-100 p-2 rounded-full">
-                                            <i class="fas fa-shopping-cart text-green-600"></i>
-                                        </div>
-                                        @elseif($activity['type'] === 'review')
-                                        <div class="bg-blue-100 p-2 rounded-full">
-                                            <i class="fas fa-star text-blue-600"></i>
-                                        </div>
-                                        @else
-                                        <div class="bg-gray-100 p-2 rounded-full">
-                                            <i class="fas fa-bell text-gray-600"></i>
-                                        </div>
-                                        @endif
-                                    </div>
-                                    <div class="flex-1">
-                                        <p class="text-gray-800 font-medium">{{ $activity['message'] }}</p>
-                                        <p class="text-sm text-gray-500">{{ $activity['time'] }}</p>
-                                    </div>
-                                </div>
-                                @endforeach
-
-                                <!-- Sample Activities (akan diganti dengan data real) -->
-                                <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                    <div class="flex-shrink-0">
-                                        <div class="bg-green-100 p-2 rounded-full">
-                                            <i class="fas fa-shopping-cart text-green-600"></i>
-                                        </div>
-                                    </div>
-                                    <div class="flex-1">
-                                        <p class="text-gray-800 font-medium">New order #1234</p>
-                                        <p class="text-sm text-gray-500">5 hours ago</p>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                    <div class="flex-shrink-0">
-                                        <div class="bg-green-100 p-2 rounded-full">
-                                            <i class="fas fa-shopping-cart text-green-600"></i>
-                                        </div>
-                                    </div>
-                                    <div class="flex-1">
-                                        <p class="text-gray-800 font-medium">New order #1233</p>
-                                        <p class="text-sm text-gray-500">1 day ago</p>
-                                    </div>
-                                </div>
-
-                                <div class="flex items-start space-x-3 p-3 bg-gray-50 rounded-lg">
-                                    <div class="flex-shrink-0">
-                                        <div class="bg-blue-100 p-2 rounded-full">
-                                            <i class="fas fa-star text-blue-600"></i>
-                                        </div>
-                                    </div>
-                                    <div class="flex-1">
-                                        <p class="text-gray-800 font-medium">Jane Doe: Great quality product!</p>
-                                        <p class="text-sm text-gray-500">2 days ago</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Recent Activity removed per request -->
                 </div>
             </div>
         </main>
