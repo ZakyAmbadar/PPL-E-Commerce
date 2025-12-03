@@ -26,8 +26,8 @@ class SellerSeeder extends Seeder
 
         $sellers = [];
 
-        // Generate 60 sellers distributed across provinces
-        for ($i = 1; $i <= 60; $i++) {
+        // Generate 20 sellers distributed across provinces
+        for ($i = 1; $i <= 20; $i++) {
             $prov = $provinces[array_rand($provinces)];
             $store = $faker->company . ' ' . $faker->randomElement(['Store','Shop','Mart','Outlet']);
             $pic = $faker->name;
@@ -41,7 +41,7 @@ class SellerSeeder extends Seeder
                 'email' => $email,
                 'street_address' => $faker->streetAddress,
                 'rt_rw' => sprintf('%03d/%03d', $faker->numberBetween(1, 150), $faker->numberBetween(1, 150)),
-                'village' => $faker->cityPrefix . ' ' . $faker->city,
+                'village' => 'Desa ' . $faker->city,
                 'city' => $faker->city,
                 'province' => $prov,
                 'id_card_number' => $faker->numerify('################'),

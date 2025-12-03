@@ -6,6 +6,7 @@ use App\Models\Seller;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Review;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -24,10 +25,37 @@ class AdminController extends Controller
             'total_reviews' => Review::count(),
         ];
 
+        // Products per category (for chart)
+        $categories = Category::withCount('products')->orderBy('name')->get();
+        $categoryLabels = $categories->pluck('name');
+        $categoryCounts = $categories->pluck('products_count');
+
+        // Sellers per province (for chart)
+        $provinceStats = Seller::select('province', DB::raw('count(*) as count'))
+            ->groupBy('province')
+            ->orderBy('province')
+            ->get();
+        $provinceLabels = $provinceStats->map(function ($r) { return $r->province ?: 'Unknown'; });
+        $provinceCounts = $provinceStats->pluck('count');
+
+        // Active vs Inactive sellers
+        $activeCount = Seller::where('status', 'approved')->count();
+        $inactiveCount = Seller::where('status', '!=', 'approved')->count();
+
+        // Reviews: counts with comments and ratings
+        $reviewsWithComments = Review::whereNotNull('comment')->where('comment', '<>', '')->count();
+        $reviewsWithRating = Review::whereNotNull('rating')->where('rating', '>', 0)->count();
+
         $recentSellers = Seller::latest()->take(5)->get();
         $recentProducts = Product::with('seller', 'category')->latest()->take(5)->get();
 
-        return view('admin.dashboard', compact('stats', 'recentSellers', 'recentProducts'));
+        return view('admin.dashboard', compact(
+            'stats', 'recentSellers', 'recentProducts',
+            'categoryLabels', 'categoryCounts',
+            'provinceLabels', 'provinceCounts',
+            'activeCount', 'inactiveCount',
+            'reviewsWithComments', 'reviewsWithRating'
+        ));
     }
 
     /**

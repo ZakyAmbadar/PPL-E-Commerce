@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\DB;
 use Faker\Factory as Faker;
 
 class ReviewSeeder extends Seeder
@@ -30,7 +29,7 @@ class ReviewSeeder extends Seeder
                     'reviewer_email' => $faker->safeEmail,
                     'reviewer_phone' => $faker->phoneNumber,
                     'rating' => $faker->numberBetween(1, 5),
-                    'comment' => $hasComment ? $faker->sentence(10) : null,
+                    'comment' => $hasComment ? $faker->sentence(10) : '',
                     'is_approved' => true,
                     'created_at' => now()->subDays($faker->numberBetween(0,120)),
                     'updated_at' => now(),

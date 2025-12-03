@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
+    @php use Illuminate\Support\Str; @endphp
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Platform Admin Dashboard</title>
@@ -123,6 +124,33 @@
                     </div>
                 </div>
 
+                <!-- Charts: products by category, sellers by province, seller status -->
+                <div class="bg-white rounded-lg shadow p-6 mb-8">
+                    <div class="mb-4">
+                        <h2 class="text-lg font-semibold text-gray-800">Visualisasi Sebaran (Grafis)</h2>
+                        <p class="text-sm text-gray-500">Distribusi produk per kategori, toko per provinsi, dan status penjual.</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <canvas id="productsByCategoryChart" style="max-height:260px"></canvas>
+                        </div>
+
+                        <div>
+                            <canvas id="sellersByProvinceChart" style="max-height:260px"></canvas>
+                        </div>
+
+                        <div>
+                            <canvas id="sellerStatusChart" style="max-height:260px"></canvas>
+                            <div class="mt-3 text-sm text-gray-600">
+                                <p><strong>Total Reviews:</strong> {{ $stats['total_reviews'] ?? 0 }}</p>
+                                <p><strong>Reviews w/ Comment:</strong> {{ $reviewsWithComments ?? 0 }}</p>
+                                <p><strong>Reviews w/ Rating:</strong> {{ $reviewsWithRating ?? 0 }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Quick Actions -->
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                     <a href="{{ route('admin.sellers.all') }}" class="bg-white rounded-lg shadow p-6 text-center hover:shadow-md transition-shadow cursor-pointer">
@@ -232,6 +260,79 @@
                     console.log('Navigating to:', this.href);
                 });
             });
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Data from server
+            const categoryLabels = @json($categoryLabels ?? []);
+            const categoryCounts = @json($categoryCounts ?? []);
+
+            const provinceLabels = @json($provinceLabels ?? []);
+            const provinceCounts = @json($provinceCounts ?? []);
+
+            const activeCount = {{ $activeCount ?? 0 }};
+            const inactiveCount = {{ $inactiveCount ?? 0 }};
+
+            // Products by Category (bar)
+            const ctxProd = document.getElementById('productsByCategoryChart');
+            if (ctxProd) {
+                new Chart(ctxProd.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: categoryLabels,
+                        datasets: [{
+                            label: 'Jumlah Produk',
+                            data: categoryCounts,
+                            backgroundColor: 'rgba(59,130,246,0.6)'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: { y: { beginAtZero: true } }
+                    }
+                });
+            }
+
+            // Sellers by Province (horizontal bar)
+            const ctxProv = document.getElementById('sellersByProvinceChart');
+            if (ctxProv) {
+                new Chart(ctxProv.getContext('2d'), {
+                    type: 'bar',
+                    data: {
+                        labels: provinceLabels,
+                        datasets: [{
+                            label: 'Jumlah Toko',
+                            data: provinceCounts,
+                            backgroundColor: 'rgba(16,185,129,0.6)'
+                        }]
+                    },
+                    options: {
+                        indexAxis: 'y',
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: { x: { beginAtZero: true } }
+                    }
+                });
+            }
+
+            // Seller status (doughnut)
+            const ctxStatus = document.getElementById('sellerStatusChart');
+            if (ctxStatus) {
+                new Chart(ctxStatus.getContext('2d'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: ['Aktif', 'Tidak Aktif'],
+                        datasets: [{
+                            data: [activeCount, inactiveCount],
+                            backgroundColor: ['#10B981', '#F59E0B']
+                        }]
+                    },
+                    options: { responsive: true, maintainAspectRatio: false }
+                });
+            }
         });
     </script>
 </body>

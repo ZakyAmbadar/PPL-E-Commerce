@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Seller Dashboard</title>
+    @php use Illuminate\Support\Facades\Auth; @endphp
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -105,13 +106,13 @@
                                     </div>
                                 </a>
 
-                                <a href="#" class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-purple-50 hover:border-purple-200 transition-colors">
+                                <a href="{{ route('seller.reports.index') }}" class="flex items-center p-4 border border-gray-200 rounded-lg hover:bg-purple-50 hover:border-purple-200 transition-colors">
                                     <div class="bg-purple-100 p-3 rounded-lg">
                                         <i class="fas fa-chart-bar text-purple-600"></i>
                                     </div>
                                     <div class="ml-4">
-                                        <h3 class="font-semibold text-gray-800">View Report</h3>
-                                        <p class="text-sm text-gray-600">Sales and performance reports</p>
+                                        <h3 class="font-semibold text-gray-800">View Reports</h3>
+                                        <p class="text-sm text-gray-600">Laporan produk & toko</p>
                                     </div>
                                 </a>
 
@@ -134,18 +135,6 @@
         </main>
     </div>
 
-    <script>
-        // Simple interactivity for quick access links
-        document.addEventListener('DOMContentLoaded', function() {
-            const quickAccessLinks = document.querySelectorAll('a[href="#"]');
-            quickAccessLinks.forEach(link => {
-                link.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const title = this.querySelector('h3').textContent;
-                    alert(`Navigating to: ${title}\n\n(This feature will be implemented soon!)`);
-                });
-            });
-        });
-    </script>
+    <!-- No dropdown script, link to reports page instead -->
 </body>
 </html>

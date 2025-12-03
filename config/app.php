@@ -1,6 +1,11 @@
 <?php
 
 return [
+    // ...existing config...
+
+    'aliases' => [
+        'Pdf' => Barryvdh\DomPDF\Facade\Pdf::class,
+    ],
 
     /*
     |--------------------------------------------------------------------------

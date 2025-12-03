@@ -34,6 +34,15 @@ Route::prefix('seller')->middleware(['auth:seller'])->group(function () {
     Route::put('/products/{product}', [ProductController::class, 'update'])->name('seller.products.update');
     Route::delete('/products/{product}', [ProductController::class, 'destroy'])->name('seller.products.destroy');
     Route::post('/products/{product}/toggle-status', [ProductController::class, 'toggleStatus'])->name('seller.products.toggle-status');
+    
+    // Seller Reports Index
+    Route::get('reports', function() {
+        return view('seller.reports.index');
+    })->name('seller.reports.index');
+    // Seller PDF Reports
+    Route::get('report/stock', [App\Http\Controllers\SellerReportController::class, 'stockReport'])->name('seller.report.stock');
+    Route::get('report/rating', [App\Http\Controllers\SellerReportController::class, 'ratingReport'])->name('seller.report.rating');
+    Route::get('report/reorder', [App\Http\Controllers\SellerReportController::class, 'reorderReport'])->name('seller.report.reorder');
 });
 
 // Admin Routes - SEMUA MENGGUNAKAN AdminController
