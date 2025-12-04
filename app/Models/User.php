@@ -45,4 +45,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Relasi ke sellers
+     */
+    public function sellers()
+    {
+        return $this->hasMany(Seller::class);
+    }
 }

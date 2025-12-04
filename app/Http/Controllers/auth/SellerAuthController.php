@@ -72,7 +72,10 @@ class SellerAuthController extends Controller
         $idCardPath = $request->file('id_card_file')->store('seller-documents', 'public');
         $picPhotoPath = $request->file('pic_photo')->store('seller-photos', 'public');
 
+        // Cek jika ada user dengan email yang sama
+        $user = \App\Models\User::where('email', $request->email)->first();
         $seller = Seller::create([
+            'user_id' => $user ? $user->id : null,
             'store_name' => $request->store_name,
             'store_description' => $request->store_description,
             'pic_name' => $request->pic_name,
@@ -114,16 +117,27 @@ class SellerAuthController extends Controller
         // Tentukan jenis login (email atau phone)
         $loginType = filter_var($request->login, FILTER_VALIDATE_EMAIL) ? 'email' : 'pic_phone';
 
-        // Cari seller berdasarkan email/phone dan status approved
-        $seller = Seller::where($loginType, $request->login)
-                       ->where('status', 'approved')
-                       ->first();
+        // Cari user jika login pakai email
+        $user = null;
+        if ($loginType === 'email') {
+            $user = \App\Models\User::where('email', $request->login)->first();
+        }
+
+        // Cari seller berdasarkan user_id jika user ditemukan, jika tidak fallback ke email/phone
+        if ($user) {
+            $seller = Seller::where('user_id', $user->id)
+                           ->where('status', 'approved')
+                           ->first();
+        } else {
+            $seller = Seller::where($loginType, $request->login)
+                           ->where('status', 'approved')
+                           ->first();
+        }
 
         // Check password dan login
         if ($seller && Hash::check($request->password, $seller->password)) {
             Auth::guard('seller')->login($seller, $request->filled('remember'));
             $request->session()->regenerate();
-            
             // Redirect ke seller dashboard
             return redirect()->route('seller.dashboard');
         }

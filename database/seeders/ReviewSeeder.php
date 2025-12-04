@@ -18,18 +18,41 @@ class ReviewSeeder extends Seeder
 
         $reviews = [];
 
-        // For each product, create 0-8 reviews
+        // Komentar ulasan yang relevan dan natural
+        $comments = [
+            'Produk ini sangat bagus dan sesuai deskripsi.',
+            'Kemeja ini bagus sekali, bahannya nyaman.',
+            'Kemejanya kekecilan, mohon cek ukuran.',
+            'Pengiriman cepat dan produk berkualitas.',
+            'Barang sesuai pesanan, recommended!',
+            'Sepatunya keren dan nyaman dipakai.',
+            'Laptop berfungsi dengan baik, puas!',
+            'Buku yang dikirim original dan rapi.',
+            'Tas wanita elegan, istri saya suka.',
+            'Jaketnya hangat dan modelnya kekinian.',
+            'Mainan anak aman dan edukatif.',
+            'Masker nyaman dipakai sehari-hari.',
+            'Harga terjangkau, kualitas oke.',
+            'Produk sesuai gambar, tidak mengecewakan.',
+            'Pelayanan penjual ramah dan responsif.',
+            'Barang datang tepat waktu, packing aman.',
+            'Sandalnya empuk dan tidak licin.',
+            'Baju bagus, warna sesuai foto.',
+            'Celana jeans pas di badan.',
+            'Helm motor kuat dan stylish.',
+        ];
+
+        // For each product, create 2-6 reviews
         foreach ($productIds as $productId) {
-            $num = $faker->numberBetween(0, 8);
+            $num = $faker->numberBetween(2, 6);
             for ($i = 0; $i < $num; $i++) {
-                $hasComment = $faker->boolean(80);
                 $reviews[] = [
                     'product_id' => $productId,
                     'reviewer_name' => $faker->name,
                     'reviewer_email' => $faker->safeEmail,
                     'reviewer_phone' => $faker->phoneNumber,
-                    'rating' => $faker->numberBetween(1, 5),
-                    'comment' => $hasComment ? $faker->sentence(10) : '',
+                    'rating' => $faker->numberBetween(3, 5),
+                    'comment' => $faker->randomElement($comments),
                     'is_approved' => true,
                     'created_at' => now()->subDays($faker->numberBetween(0,120)),
                     'updated_at' => now(),

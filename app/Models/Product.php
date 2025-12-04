@@ -11,6 +11,7 @@ class Product extends Model
 
     protected $fillable = [
         'name',
+        'brand',
         'description',
         'price',
         'stock',
@@ -19,12 +20,14 @@ class Product extends Model
         'seller_id',
         'condition',
         'min_order',
+        'images',
         'is_active'
     ];
 
     protected $casts = [
         'price' => 'decimal:2',
-        'is_active' => 'boolean'
+        'is_active' => 'boolean',
+        'images' => 'array',
     ];
 
     public function category()

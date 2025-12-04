@@ -4,7 +4,7 @@
     @php use Illuminate\Support\Str; @endphp
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Platform Admin Dashboard</title>
+    <title>Dashboard Admin Platform</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
@@ -14,21 +14,21 @@
         <div class="w-64 bg-blue-800 text-white">
             <div class="p-6">
                 <h1 class="text-2xl font-bold">MarketPlace</h1>
-                <p class="text-blue-200 text-sm mt-2">Admin Platform</p>
+                <p class="text-blue-200 text-sm mt-2">Platform Admin</p>
             </div>
             
             <nav class="mt-8">
                 <a href="{{ route('admin.dashboard') }}" class="flex items-center px-6 py-3 bg-blue-900 border-l-4 border-white">
                     <i class="fas fa-tachometer-alt w-6"></i>
-                    <span class="ml-3">Dashboard</span>
+                    <span class="ml-3">Beranda</span>
                 </a>
                 <a href="{{ route('admin.sellers.all') }}" class="flex items-center px-6 py-3 hover:bg-blue-700 border-l-4 border-transparent">
                     <i class="fas fa-store w-6"></i>
-                    <span class="ml-3">Manage Sellers</span>
+                    <span class="ml-3">Kelola Penjual</span>
                 </a>
                 <a href="{{ route('admin.seller.verification') }}" class="flex items-center px-6 py-3 hover:bg-blue-700 border-l-4 border-transparent">
                     <i class="fas fa-check-circle w-6"></i>
-                    <span class="ml-3">Verify Sellers</span>
+                    <span class="ml-3">Verifikasi Penjual</span>
                     @if($stats['pending_sellers'] > 0)
                         <span class="ml-auto bg-red-500 text-white text-xs px-2 py-1 rounded-full">
                             {{ $stats['pending_sellers'] }}
@@ -37,11 +37,11 @@
                 </a>
                 <a href="{{ route('admin.reports.index') }}" class="flex items-center px-6 py-3 hover:bg-blue-700 border-l-4 border-transparent">
                     <i class="fas fa-chart-bar w-6"></i>
-                    <span class="ml-3">View Reports</span>
+                    <span class="ml-3">Lihat Laporan</span>
                 </a>
                 <a href="#" class="flex items-center px-6 py-3 hover:bg-blue-700 border-l-4 border-transparent">
                     <i class="fas fa-tags w-6"></i>
-                    <span class="ml-3">Manage Categories</span>
+                    <span class="ml-3">Kelola Kategori</span>
                 </a>
             </nav>
         </div>
@@ -52,7 +52,7 @@
             <header class="bg-white shadow">
                 <div class="flex justify-between items-center px-8 py-4">
                     <div>
-                        <h1 class="text-2xl font-bold text-gray-800">Platform Admin Dashboard</h1>
+                        <h1 class="text-2xl font-bold text-gray-800">Dashboard Admin Platform</h1>
                     </div>
                     <div class="flex items-center space-x-4">
                         <div class="relative">
@@ -75,7 +75,7 @@
                     <div class="bg-white rounded-lg shadow p-6 border-l-4 border-blue-500">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-gray-500 text-sm">Total Registered</p>
+                                <p class="text-gray-500 text-sm">Total Penjual Terdaftar</p>
                                 <p class="text-3xl font-bold text-gray-800 mt-2">{{ number_format($stats['total_sellers']) }}</p>
                             </div>
                             <div class="bg-blue-100 p-3 rounded-full">
@@ -83,7 +83,7 @@
                             </div>
                         </div>
                         <div class="mt-4 text-sm text-green-600">
-                            <i class="fas fa-arrow-up"></i> 12% from last month
+                            <i class="fas fa-arrow-up"></i> 12% dari bulan lalu
                         </div>
                     </div>
 
@@ -91,7 +91,7 @@
                     <div class="bg-white rounded-lg shadow p-6 border-l-4 border-green-500">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-gray-500 text-sm">Total Products</p>
+                                <p class="text-gray-500 text-sm">Total Produk</p>
                                 <p class="text-3xl font-bold text-gray-800 mt-2">{{ number_format($stats['total_products']) }}</p>
                             </div>
                             <div class="bg-green-100 p-3 rounded-full">
@@ -99,7 +99,7 @@
                             </div>
                         </div>
                         <div class="mt-4 text-sm text-green-600">
-                            <i class="fas fa-arrow-up"></i> 8% from last month
+                            <i class="fas fa-arrow-up"></i> 8% dari bulan lalu
                         </div>
                     </div>
 
@@ -109,7 +109,7 @@
                     <div class="bg-white rounded-lg shadow p-6 border-l-4 border-yellow-500">
                         <div class="flex items-center justify-between">
                             <div>
-                                <p class="text-gray-500 text-sm">Sellers Pending Verification</p>
+                                <p class="text-gray-500 text-sm">Penjual Menunggu Verifikasi</p>
                                 <p class="text-3xl font-bold text-gray-800 mt-2">{{ $stats['pending_sellers'] }}</p>
                             </div>
                             <div class="bg-yellow-100 p-3 rounded-full">
@@ -118,7 +118,7 @@
                         </div>
                         <div class="mt-4">
                             <a href="{{ route('admin.seller.verification') }}" class="text-blue-600 text-sm hover:text-blue-800">
-                                Review Now <i class="fas fa-arrow-right ml-1"></i>
+                                Tinjau Sekarang <i class="fas fa-arrow-right ml-1"></i>
                             </a>
                         </div>
                     </div>
@@ -157,19 +157,19 @@
                         <div class="bg-blue-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
                             <i class="fas fa-store text-blue-500 text-xl"></i>
                         </div>
-                        <h3 class="font-semibold text-gray-800">Manage Sellers</h3>
-                        <p class="text-gray-500 text-sm mt-1">View all registered sellers</p>
+                        <h3 class="font-semibold text-gray-800">Kelola Penjual</h3>
+                        <p class="text-gray-500 text-sm mt-1">Lihat semua penjual terdaftar</p>
                     </a>
 
                     <a href="{{ route('admin.seller.verification') }}" class="bg-white rounded-lg shadow p-6 text-center hover:shadow-md transition-shadow cursor-pointer">
                         <div class="bg-yellow-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
                             <i class="fas fa-clipboard-check text-yellow-500 text-xl"></i>
                         </div>
-                        <h3 class="font-semibold text-gray-800">Verify Sellers</h3>
-                        <p class="text-gray-500 text-sm mt-1">Review pending seller applications</p>
+                        <h3 class="font-semibold text-gray-800">Verifikasi Penjual</h3>
+                        <p class="text-gray-500 text-sm mt-1">Tinjau aplikasi penjual yang menunggu</p>
                         @if($stats['pending_sellers'] > 0)
                             <span class="inline-block mt-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full">
-                                {{ $stats['pending_sellers'] }} pending
+                                {{ $stats['pending_sellers'] }} menunggu
                             </span>
                         @endif
                     </a>
@@ -178,16 +178,16 @@
                         <div class="bg-purple-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
                             <i class="fas fa-chart-bar text-purple-500 text-xl"></i>
                         </div>
-                        <h3 class="font-semibold text-gray-800">View Reports</h3>
-                        <p class="text-gray-500 text-sm mt-1">Platform analytics & reports</p>
+                        <h3 class="font-semibold text-gray-800">Lihat Laporan</h3>
+                        <p class="text-gray-500 text-sm mt-1">Analitik & laporan platform</p>
                     </a>
 
                     <a href="#" class="bg-white rounded-lg shadow p-6 text-center hover:shadow-md transition-shadow cursor-pointer">
                         <div class="bg-orange-100 w-12 h-12 rounded-full flex items-center justify-center mx-auto mb-3">
                             <i class="fas fa-tags text-orange-500 text-xl"></i>
                         </div>
-                        <h3 class="font-semibold text-gray-800">Manage Categories</h3>
-                        <p class="text-gray-500 text-sm mt-1">Product categories management</p>
+                        <h3 class="font-semibold text-gray-800">Kelola Kategori</h3>
+                        <p class="text-gray-500 text-sm mt-1">Manajemen kategori produk</p>
                     </a>
                 </div>
 
@@ -196,7 +196,7 @@
                     <!-- Recent Sellers -->
                     <div class="bg-white rounded-lg shadow">
                         <div class="px-6 py-4 border-b">
-                            <h2 class="text-lg font-semibold text-gray-800">Recent Sellers</h2>
+                            <h2 class="text-lg font-semibold text-gray-800">Penjual Terbaru</h2>
                         </div>
                         <div class="p-6">
                             @foreach($recentSellers as $seller)
@@ -222,7 +222,7 @@
                     <!-- Recent Products -->
                     <div class="bg-white rounded-lg shadow">
                         <div class="px-6 py-4 border-b">
-                            <h2 class="text-lg font-semibold text-gray-800">Recent Products</h2>
+                            <h2 class="text-lg font-semibold text-gray-800">Produk Terbaru</h2>
                         </div>
                         <div class="p-6">
                             @foreach($recentProducts as $product)

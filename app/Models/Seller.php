@@ -10,6 +10,7 @@ class Seller extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
+        'user_id',
         'store_name',
         'store_description',
         'pic_name',
@@ -27,6 +28,13 @@ class Seller extends Authenticatable
         'status',
         'verified_at'
     ];
+    /**
+     * Relasi ke user
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
     protected $hidden = [
         'password',

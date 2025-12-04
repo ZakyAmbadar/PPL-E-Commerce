@@ -33,7 +33,12 @@ class SellerSeeder extends Seeder
             $pic = $faker->name;
             $email = 'seller' . $i . '@example.com';
 
+            // Cari user dengan email yang sama, jika ada
+            $user = DB::table('users')->where('email', $email)->first();
+            $userId = $user ? $user->id : null;
+
             $sellers[] = [
+                'user_id' => $userId,
                 'store_name' => $store,
                 'store_description' => $faker->sentence(6),
                 'pic_name' => $pic,
@@ -48,7 +53,7 @@ class SellerSeeder extends Seeder
                 'id_card_file' => 'documents/ktp_placeholder.jpg',
                 'pic_photo' => 'photos/pic_placeholder.jpg',
                 'password' => Hash::make('password123'),
-                'status' => $faker->randomElement(['approved','pending','rejected']),
+                'status' => 'approved',
                 'verified_at' => now()->subDays($faker->numberBetween(0,30)),
                 'created_at' => now()->subDays($faker->numberBetween(1,120)),
                 'updated_at' => now(),

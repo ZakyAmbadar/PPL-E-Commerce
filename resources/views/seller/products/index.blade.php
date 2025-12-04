@@ -1,3 +1,9 @@
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Status
+                                        </th>
+                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                            Aksi
+                                        </th>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -15,8 +21,8 @@
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="flex justify-between items-center py-4">
                     <div>
-                        <h1 class="text-2xl font-bold text-gray-900">Manage Products</h1>
-                        <p class="text-gray-600">Manage your store products</p>
+                        <h1 class="text-2xl font-bold text-gray-900">Kelola Produk</h1>
+                        <p class="text-gray-600">Kelola produk yang ada di toko Anda</p>
                     </div>
                     <div class="flex items-center space-x-4">
                         <a href="{{ route('seller.dashboard') }}" class="text-gray-600 hover:text-gray-900">
@@ -48,23 +54,23 @@
                                 <thead class="bg-gray-50">
                                     <tr>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Product
+                                            Produk
                                         </th>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Category
+                                            Kategori
                                         </th>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Price
+                                            Harga
                                         </th>
                                         <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Stock
+                                            Stok
                                         </th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Status
-                                        </th>
-                                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                            Actions
-                                        </th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Status
+                                            </th>
+                                            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                Aksi
+                                            </th>
                                     </tr>
                                 </thead>
                                 <tbody class="bg-white divide-y divide-gray-200">
@@ -80,7 +86,7 @@
                                                         {{ Str::limit($product->name, 30) }}
                                                     </div>
                                                     <div class="text-sm text-gray-500">
-                                                        {{ $product->condition == 'new' ? 'New' : 'Used' }}
+                                                        {{ $product->condition == 'new' ? 'Baru' : 'Bekas' }}
                                                     </div>
                                                 </div>
                                             </div>
@@ -97,13 +103,13 @@
                                         <td class="px-6 py-4 whitespace-nowrap">
                                             <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
                                                 {{ $product->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                                {{ $product->is_active ? 'Active' : 'Inactive' }}
+                                                {{ $product->is_active ? 'Aktif' : 'Tidak Aktif' }}
                                             </span>
                                         </td>
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             <div class="flex space-x-2">
                                                 <a href="{{ route('seller.products.edit', $product) }}" 
-                                                   class="text-blue-600 hover:text-blue-900">
+                                                   class="text-blue-600 hover:text-blue-900" title="Ubah Produk">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
                                                 <form action="{{ route('seller.products.destroy', $product) }}" method="POST" class="inline">
@@ -111,14 +117,14 @@
                                                     @method('DELETE')
                                                     <button type="submit" 
                                                             class="text-red-600 hover:text-red-900"
-                                                            onclick="return confirm('Are you sure you want to delete this product?')">
+                                                            onclick="return confirm('Yakin ingin menghapus produk ini?')" title="Hapus Produk">
                                                         <i class="fas fa-trash"></i>
                                                     </button>
                                                 </form>
                                                 <form action="{{ route('seller.products.toggle-status', $product) }}" method="POST" class="inline">
                                                     @csrf
                                                     <button type="submit" 
-                                                            class="text-gray-600 hover:text-gray-900">
+                                                            class="text-gray-600 hover:text-gray-900" title="Aktif/Tidak Aktif">
                                                         <i class="fas fa-power-off"></i>
                                                     </button>
                                                 </form>
@@ -132,11 +138,11 @@
                     @else
                         <div class="text-center py-12">
                             <i class="fas fa-box-open text-4xl text-gray-400 mb-4"></i>
-                            <h3 class="text-lg font-medium text-gray-900">No products found</h3>
-                            <p class="text-gray-500 mt-2">Get started by creating your first product.</p>
+                            <h3 class="text-lg font-medium text-gray-900">Belum ada produk</h3>
+                            <p class="text-gray-500 mt-2">Mulai dengan menambahkan produk pertama Anda.</p>
                             <a href="{{ route('seller.products.create') }}" 
                                class="mt-4 inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
-                                <i class="fas fa-plus mr-2"></i>Add Your First Product
+                                <i class="fas fa-plus mr-2"></i>Tambah Produk Pertama
                             </a>
                         </div>
                     @endif

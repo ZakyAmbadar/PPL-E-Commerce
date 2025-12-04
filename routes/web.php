@@ -7,10 +7,14 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\SellerAuthController;
 use Illuminate\Support\Facades\Route;
 
-// Home Route - Redirect ke seller login
-Route::get('/', function () {
-    return redirect('/seller/login');
-});
+
+use App\Http\Controllers\CatalogController;
+// Home Route - Landing page katalog
+Route::get('/', [CatalogController::class, 'index'])->name('home');
+// Katalog publik
+Route::get('/catalog', [CatalogController::class, 'index'])->name('catalog.index');
+Route::get('/catalog/{id}', [CatalogController::class, 'show'])->name('catalog.show');
+Route::post('/catalog/{id}/review', [\App\Http\Controllers\ReviewController::class, 'store'])->name('catalog.review.store');
 
 // Seller Auth Routes (PUBLIC)
 Route::prefix('seller')->group(function () {
@@ -43,6 +47,8 @@ Route::prefix('seller')->middleware(['auth:seller'])->group(function () {
     Route::get('report/stock', [App\Http\Controllers\SellerReportController::class, 'stockReport'])->name('seller.report.stock');
     Route::get('report/rating', [App\Http\Controllers\SellerReportController::class, 'ratingReport'])->name('seller.report.rating');
     Route::get('report/reorder', [App\Http\Controllers\SellerReportController::class, 'reorderReport'])->name('seller.report.reorder');
+    
+
 });
 
 // Admin Routes - SEMUA MENGGUNAKAN AdminController
@@ -61,3 +67,5 @@ Route::prefix('admin')->group(function () {
     Route::get('/reports/sellers/province.pdf', [ReportController::class, 'sellersByProvincePdf'])->name('admin.reports.sellers.province.pdf');
     Route::get('/reports/products/rating.pdf', [ReportController::class, 'productsByRatingPdf'])->name('admin.reports.products.rating.pdf');
 });
+
+

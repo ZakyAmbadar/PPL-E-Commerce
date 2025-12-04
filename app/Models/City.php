@@ -9,7 +9,7 @@ class City extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'province_id'];
+    protected $fillable = ['province_id', 'type', 'name', 'postal_code'];
 
     public function province()
     {

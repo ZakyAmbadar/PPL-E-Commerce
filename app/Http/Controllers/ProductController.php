@@ -53,6 +53,7 @@ class ProductController extends Controller
     {
         $request->validate([
             'name' => 'required|string|max:255',
+            'brand' => 'required|string|max:255',
             'description' => 'required|string',
             'price' => 'required|numeric|min:0',
             'stock' => 'required|integer|min:0',
@@ -60,6 +61,8 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
             'condition' => 'required|in:new,used',
             'min_order' => 'required|integer|min:1',
+            'images' => 'required|array',
+            'images.*' => 'image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ]);
 
         $seller = Auth::guard('seller')->user();
@@ -71,6 +74,7 @@ class ProductController extends Controller
         try {
             $product = Product::create([
                 'name' => $request->name,
+                'brand' => $request->brand,
                 'description' => $request->description,
                 'price' => $request->price,
                 'stock' => $request->stock,
@@ -81,6 +85,20 @@ class ProductController extends Controller
                 'min_order' => $request->min_order,
                 'is_active' => true,
             ]);
+
+            // Handle images upload (multiple)
+            if ($request->hasFile('images')) {
+                $imagePaths = [];
+                foreach ($request->file('images') as $image) {
+                    $path = $image->store('products', 'public');
+                    $imagePaths[] = $path;
+                }
+                // Simpan langsung sebagai array, model akan cast ke array otomatis
+                $product->images = $imagePaths;
+                $product->save();
+            }
+
+            // TODO: Handle variants (future)
 
             logger('Product created successfully: ' . $product->id);
             logger('=== END DEBUG ===');
