@@ -122,16 +122,16 @@
                         @enderror
                     </div>
 
-                    <div>
+                     <div>
                         <label for="village" class="block text-sm font-medium text-gray-700">Kelurahan *</label>
                         <input type="text" id="village_text" name="village" required
-                               placeholder="Isi Kelurahan (contoh: Kebon Jeruk)"
-                               value="{{ old('village') }}"
-                               class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                            placeholder="Isi Kelurahan (contoh: Kebon Jeruk)"
+                            value="{{ old('village') }}"
+                            class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500">
                         @error('village')
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                         @enderror
-                    </div>
+                        </div>
 
                     <div>
                         <label for="city" class="block text-sm font-medium text-gray-700">Kota *</label>

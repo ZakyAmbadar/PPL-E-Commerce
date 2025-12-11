@@ -12,7 +12,7 @@
     {{-- Navbar --}}
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
         <div class="container">
-            <a class="navbar-brand fw-bold" href="/">PPL E-Commerce</a>
+            <a class="navbar-brand fw-bold" href="/">Kmart</a>
         </div>
     </nav>
 

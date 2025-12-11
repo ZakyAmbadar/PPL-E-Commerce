@@ -10,9 +10,7 @@
     {{-- Navbar (Tetap sama seperti sebelumnya) --}}
     <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm mb-4">
         <div class="container">
-            <div style="height: 180px; overflow: hidden;">
-                <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=1200&q=80" class="card-img-top w-100 h-100 object-fit-cover" alt="Banner Katalog Produk">
-            </div>
+            <a class="navbar-brand fw-bold" href="/">Kmart</a>
         </div>
     </nav>
 
